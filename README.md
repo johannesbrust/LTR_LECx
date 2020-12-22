@@ -6,7 +6,9 @@ MATLAB codes
 
 This project contains the implementations of the Algorithms from the article
 (with possible name changes)
+
 "Large-Scale Optimzation with Linear Equality Constraints", 
+
 J.J. Brust, R.F. Marcia, C.G. Petra, M.A. Saunders 2020/2021.
 
 The folders comprising this project are:
@@ -18,7 +20,7 @@ The folders comprising this project are:
 3. 	auxiliary: General auxiliary routines.
 4.	solvers: External Algorithms for comparisons.
 5. 	ssget: Interface to the Sparse Suite Matrix collection
-        link[SSMat](https://sparse.tamu.edu/).
+        link [SSMat](https://sparse.tamu.edu/).
 6.  experiments: 
         - EXPERIMENT_III (Rosenbrock + Suite Sparse A)
         - EXPERIMENT_IV  (CUTEst objective + sprandn A)
@@ -30,10 +32,10 @@ The folders comprising this project are:
 You can run an example from within the /examples folder. On
 the MATLAB command prompt displays information per iteration:
 
-> TR1H_QUADRATIC
+`> TR1H_QUADRATIC`
 
 **********************
-Running LTRL2-LEC
+`Running LTRL2-LEC
 it	 obj		 norm(b)	 norm(Proj(g))) 	 norm(dx)	 trrad
 0	 2.748e+04	 4.268e-14	 7.296e+03	---		 ---
 1	 1.425e+04	 3.404e-14	 3.924e+03	 4.000e+00	 1.544e+01 
@@ -47,8 +49,8 @@ it	 obj		 norm(b)	 norm(Proj(g))) 	 norm(dx)	 trrad
 9	 4.119e+03	 4.737e-14	 1.360e+03	 1.888e+00	 9.442e-01
 10	 3.837e+03	 3.850e-14	 5.000e+02	 4.708e-01	 9.442e-01
 11	 3.715e+03	 4.359e-14	 3.623e+02	 4.105e-01	 9.442e-01
-12	 3.561e+03	 3.820e-14	 4.508e+02	 9.934e-01	 1.888e+00
+12	 3.561e+03	 3.820e-14	 4.508e+02	 9.934e-01	 1.888e+00`
 .    .           .           .           .           .
 .    .           .           .           .           .
 .    .           .           .           .           .
-
+`
