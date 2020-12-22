@@ -1,5 +1,5 @@
 # LTR_LECx
-Large-Scale Trust-Region Methods For Linear Equality Constrained Optimization
+**Large-Scale Trust-Region Methods For Linear Equality Constrained Optimization**
 (extended)
 
 MATLAB codes
