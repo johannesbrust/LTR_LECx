@@ -7,7 +7,7 @@ MATLAB codes
 This project contains the implementations of the Algorithms from the article
 (with possible name changes)
 
-"Large-Scale Optimzation with Linear Equality Constraints", 
+"RCR: Reduced Compact Representation for Large-Scale Optimization with Linear Equality Constratins", 
 
 J.J. Brust, R.F. Marcia, C.G. Petra, M.A. Saunders 2020/2021.
 
