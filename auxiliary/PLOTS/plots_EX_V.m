@@ -1,9 +1,12 @@
-%-------------------- plots_EX -------------------------------------------%
+%-------------------- plots_EX_V -----------------------------------------%
 %
 % Script to generate performance profiles for the experiment outcomes
 %
 %-------------------------------------------------------------------------%
 % 12/11/20, J.B., Initial setup
+% 06/04/21, J.B., Update for most recent experiment ("Va")
+% 06/07/21, J.B., Update to generate plots for release
+% 06/09/21, J.B., Prepration of file for release
 
 % Load perf_ext_fnc
 %addpath(fullfile(pwd,'..','..','/auxiliary'));
@@ -34,7 +37,7 @@ indAlg          = [4 5 6 1 2 3 7];
 
 % Load data from experiment
 %datapath = fullfile(pwd,'..','..','/data/EXPERIMENT_III_EXT');
-dataEX = load([datapath,'EXPERIMENT_IV_EXT']);
+dataEX = load([datapath,'EXPERIMENT_V_EXT']);
 
 % Data stored as (only rows 1-50 of the problems were used in experiment):
 % dataEX = 
@@ -51,68 +54,14 @@ exs = dataEX.ex;
 its = dataEX.numit;
 times = dataEX.t_aver;
 
-% Patch certain experiments with data from rerun
-dataEX_CHK = load([datapath,'EXPERIMENT_IV_EXT_IPOPTCHK']);
-fid = fopen(fullfile(probpath,'cutest_list.txt'),'r');
-% Checklist of problems
-clist={'ARWHEAD';...
-        'BRYBND';...
-        'COSINE';...
-        'CURLY10';...
-        'CURLY20';...
-        'CURLY30';...
-        'DIXMAANG';...
-        'DIXMAANJ';...
-        'DIXMAANK';...
-        'GENHUMPS';...
-        'LIARWHD';...
-        'NONDIA';...
-        'SCHMVETT';...
-        'SPMSRTLS';...
-        'TQUARTIC';...
-        'WOODS';...
-        'SPARSINE';...
-        'TESTQUAD';...
-        'JIMACK'};
-%data = load('EVEN_N_PROBS');
-%probIdx = data.probIdx;
-nprob = 62;
-selIdx = zeros(nprob,1,'int8');
-% 
-i = 0;
-tline = fgets(fid);
-while ischar(tline)     
-    tline = fgets(fid);
-    % Loading problem and some data    
-    if (~strcmp(tline(1),'%'))  && (ischar(tline))
-        tline_ = tline;
-        tline = strtrim(tline);
 
-        i = i+1;
-        if sum(strcmp(tline,clist))==0
-            continue; % Skip problem if not in clist
-        else
-            selIdx(i) = 1;
-        end
-    end
-end
-
-% Patch selected problems
-% The "rerun" only stored outcomes of IPOPT
-ncList = length(clist);
-selIdxF = find(selIdx);
-exs(selIdxF,7)=diag(dataEX_CHK.ex(1:ncList,1:ncList));
-its(selIdxF,7)=diag(dataEX_CHK.numit(1:ncList,1:ncList));
-times(selIdxF,7)=diag(dataEX_CHK.t_aver(1:ncList,1:ncList));
+% Patch iteration outcomes "0"
+its(its(:,7)==0,7) = 0.5;
 
 % Preparing and call to performance plot
-
-% if isempty(legLocation) == true
-%     legLocation='SouthEast';
-% end
 legLocation='SouthEast';
-ticks   = -1;
-ticke   = 5;
+ticks   = -2;
+ticke   = 10;
 XTick   = 2.^(ticks:ticke);
 XLim    = [XTick(1),XTick(end)];
 %perf_fnc(exs(:,indAlg),its(:,indAlg),leg(indAlg),1,types,'SouthEast',taumax);
@@ -127,7 +76,14 @@ fig.PaperPositionMode   = 'auto';
 fig_pos                 = fig.PaperPosition;
 fig.PaperSize           = [fig_pos(3) fig_pos(4)];
 
-figname ='EXPERIMENT_IV_ITER';
+% Axis annotation
+ax = gca;
+ax.XTick = [2^(-2), 1, 2^2, 2^4, 2^(6), 2^8, 2^10];
+%XTickLabel = {'$2^{-8}$', '$2^{-4}$', '$1$', '$2^{4}$', '$2^{24}$'};
+XTickLabel = {'2^{-2}', '1', '2^{2}', '2^{4}', '2^{6}', '2^{8}' , '2^{10}'};
+set(ax,'XTickLabel',XTickLabel);
+
+figname ='EXPERIMENT_Va_ITER';
 figname = [figname,'.pdf'];
 
 print(fig,'-dpdf',fullfile(figpath,figname));
@@ -142,7 +98,15 @@ fig.PaperPositionMode   = 'auto';
 fig_pos                 = fig.PaperPosition;
 fig.PaperSize           = [fig_pos(3) fig_pos(4)];
 
-figname ='EXPERIMENT_IV_TIME';
+% Axis annotation
+ax = gca;
+ax.XTick = [2^(-2), 1, 2^2, 2^4, 2^(6), 2^8, 2^10];
+%XTickLabel = {'$2^{-8}$', '$2^{-4}$', '$1$', '$2^{4}$', '$2^{24}$'};
+XTickLabel = {'2^{-2}', '1', '2^{2}', '2^{4}', '2^{6}', '2^{8}' , '2^{10}'};
+set(ax,'XTickLabel',XTickLabel);
+
+
+figname ='EXPERIMENT_Va_TIME';
 figname = [figname,'.pdf'];
 
 print(fig,'-dpdf',fullfile(figpath,figname));

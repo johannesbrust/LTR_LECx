@@ -6,7 +6,7 @@ continue_ = true;
 
 tEnd = toc(timeStart);
 
-if tEnd > 1000
+if tEnd > 3600%1000
     
     continue_ = false;
     

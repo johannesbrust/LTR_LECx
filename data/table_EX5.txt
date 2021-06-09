@@ -1,0 +1,31 @@
+$\texttt{AUG2D}$ & 10000/20200 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &7 &0.26&7 &\emph{0.15}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &7 &0.24&7 &\textbf{0.13}&12 &1.4\\ 
+$\texttt{AUG2DC}$ & 10000/20200 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.11&2 &\emph{0.067}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.1&2 &\textbf{0.067}&1 &0.15\\ 
+$\texttt{AUG2DCQP}$ & 10000/20200 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.11&2 &\emph{0.072}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.11&2 &\textbf{0.07}&1 &0.16\\ 
+$\texttt{AUG2DQP}$ & 10000/20200 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &7 &0.23&7 &\textbf{0.13}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &7 &0.24&7 &\emph{0.13}&12 &1.4\\ 
+$\texttt{AUG3D}$ & 8000/27543 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &10 &0.68&10 &\emph{0.52}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &10 &0.6&10 &\textbf{0.51}&11 &2.6\\ 
+$\texttt{AUG3DC}$ & 8000/27543 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.3&2 &\emph{0.28}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.3&2 &\textbf{0.26}&1 &0.31\\ 
+$\texttt{AUG3DCQP}$ & 8000/27543 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.3&2 &\emph{0.27}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.33&2 &\textbf{0.26}&1 &0.33\\ 
+$\texttt{AUG3DQP}$ & 8000/27543 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &10 &0.74&10 &\emph{0.55}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &10 &0.64&10 &\textbf{0.5}&11 &2.6\\ 
+$\texttt{CVXQP1}$ & 5000/10000 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &827 &7.8&805 &\textbf{3.8}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &827 &7.3&805 &\emph{3.8}&740 &51\\ 
+$\texttt{CVXQP2}$ & 2500/10000 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &39596 &1.5e+02&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &47572 &1.8e+02&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{CVXQP3}$ & 7500/10000 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &169 &2.8&169 &\emph{1.4}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &169 &2.4&169 &\textbf{1.4}&118 &8.9\\ 
+$\texttt{STCQP1}$ & 4095/8193 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &88 &\textbf{0.15}&88 &0.42&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &88 &\emph{0.18}&88 &0.36&75 &6.8e+02\\ 
+$\texttt{STCQP2}$ & 4095/8193 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &142 &\textbf{0.25}&142 &0.8&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &144 &\emph{0.28}&144 &0.72&136 &4.8\\ 
+$\texttt{DTOC1L}$ & 3996/5998 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &13 &\textbf{0.073}&13 &0.13&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &13 &\emph{0.075}&13 &0.14&16 &0.41\\ 
+$\texttt{DTOC3}$ & 2998/4499 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &\textbf{0.025}&5 &0.059&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &\emph{0.03}&5 &0.033&4 &0.09\\ 
+$\texttt{PORTSQP}$ & 1/100000 &2 &0.09&2 &0.064&2 &0.067&2 &\emph{0.062}&2 &\textbf{0.059}&2 &0.062&1 &0.42\\ 
+$\texttt{HUES-MOD}$ & 2/5000 &1 &0.0028&1 &\textbf{0.0018}&1 &0.0027&1 &0.0026&1 &\emph{0.0018}&1 &0.0026&1 &0.024\\ 
+$\texttt{HUESTIS}$ & 2/5000 &2 &0.0073&2 &\textbf{0.0042}&2 &0.011&2 &0.0061&2 &\emph{0.0047}&2 &0.0094&2 &0.072\\ 
+$\texttt{A0ESDNDL}$ & 15002/45006 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &69&5 &\emph{0.13}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &71&5 &\textbf{0.12}&6 &1.8\\ 
+$\texttt{A0ESINDL}$ & 15002/45006 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &73&5 &\emph{0.12}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &70&5 &\textbf{0.11}&6 &1.8\\ 
+$\texttt{PORTSNQP}$ & 2/100000 &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &2 &\textbf{0.092}&2 &0.11&14 &0.47&2 &\emph{0.095}&2 &0.1&2 &0.88\\ 
+$\texttt{BLOWEYA}$ & 2002/4002 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\textbf{0.011}&2 &0.031&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\emph{0.015}&2 &0.021&2 &0.082\\ 
+$\texttt{BLOWEYB}$ & 2002/4002 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\textbf{0.015}&2 &0.019&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\emph{0.016}&2 &0.019&2 &0.082\\ 
+$\texttt{BLOWEYC}$ & 2002/4002 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\textbf{0.015}&2 &0.017&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\emph{0.015}&2 &0.021&2 &0.15\\ 
+$\texttt{CONT5-QP}$ & 40200/40601 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\emph{0.51}&2 &0.79&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &\textbf{0.49}&2 &0.8&2 &1.3\\ 
+$\texttt{DTOC1L}$ & 3996/5998 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &\textbf{0.03}&5 &0.09&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &5 &\emph{0.043}&5 &0.045&4 &0.12\\ 
+$\texttt{FERRISDC}$ & 210/2200 &2 &0.084&2 &0.083&2 &0.077&2 &\emph{0.076}&2 &0.078&2 &0.079&0 &\textbf{0.021}\\ 
+$\texttt{GOULDQP2}$ & 9999/19999 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.038&2 &\textbf{0.025}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &2 &0.038&2 &\emph{0.026}&2 &0.2\\ 
+$\texttt{GOULDQP3}$ & 9999/19999 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &6 &0.076&6 &\emph{0.054}&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &6 &0.077&6 &\textbf{0.053}&7 &0.69\\ 
+$\texttt{LINCONT}$ & 419/1257 &5 &0.058&5 &\emph{0.02}&5 &0.031&5 &0.05&5 &\textbf{0.019}&5 &0.03&5 &0.055\\ 
+$\texttt{SOSQP2}$ & 2501/5000 &$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &3 &\textbf{0.017}&3 &0.04&$\texttt{N/A}^{*}$ & $\texttt{N/A}$ &3 &0.022&3 &\emph{0.019}&4 &0.11\\ 

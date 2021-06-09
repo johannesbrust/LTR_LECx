@@ -1,13 +1,14 @@
 function [x,f,outinfo] = LTRSC_LEC_V2(fun,const,x0,params)
-% LTRSC_LEC_V2 - Limited-Memory Trust-Region shape-changing Norm for
+% LTRSC_LEC_V2 - Limited-Memory Trust-Region L2 Norm for
 % Linear Equality Constrained Problems. This is version 2, which
-% extends a previous version that was intended for low dimensional linear 
-% equality constraints. Version 2 uses projected gradients to simplify the 
-% computations. (In the article this corresponds to Algorithm 2).
+% extends version 1 that was intended for low dimensional linear equality
+% constraints. Version 2 uses projected gradients to simplify the 
+% computations.
 %
-% Extended methods described in the report (or similar title): 
-% 'Large-Scale Optimization with Linear Equality Constraints', 
-% J.J. Brust, R.F. Marcia, C.G. Petra, M.A. Saunders, 2020
+% Extended methods described in: 
+% 'Large-Scale Optimization with Linear Equality Constraints Using Reduced
+% Compact Representation' (2021), J.J. Brust, R.F. Marcia, C.G. Petra, and 
+% M.A. Saunders
 %
 % Method developed for problems  
 %
@@ -31,13 +32,12 @@ function [x,f,outinfo] = LTRSC_LEC_V2(fun,const,x0,params)
 % where g = f'(x_k), B approx f''(x_k), A = h'(x_k), b = A(x_k)-b_h approx 0.
 % Here || s ||_{P,infty} is the shape-changing norm, Delta_k 
 % is the "trust-region" radius,  and B = B_k is the L-BFGS
-% compact representation (different notation from article): 
+% compact representation:
 %
-% B = delta.I + V M V',   and     B^{-1} = H = gamma.I - V N V',
+%       B = delta.I + V M V',   and     B^{-1} = H = gamma.I - V N V',
 %
 % The notation corresponding to the article is V (code) = J (article) and 
-% delta (code) = gamma (article). The middle matrices have correspoinding
-% differences, too.
+% delta (code) = gamma (article), \hat{M} (code) = -\hat{M} (article).
 %
 % Version 2 uses projected gradients to define the Quasi-Newton 
 % gradient difference vectors, i.e.,
@@ -86,6 +86,8 @@ function [x,f,outinfo] = LTRSC_LEC_V2(fun,const,x0,params)
 % 	whichConv  - Convergence criterion
 %               1: norm(P*g,2)/max(1,norm(x0)) (i.e., scaled 2-norm)
 %               2: norm(P*g,infty) (i.e., infinity-norm)
+%   tolDense - Tolerance for detecting dense columns in A, i.e.,
+%               "((A'>0)*ones(mm,1))/mm > tolDense"
 %
 % outinfo contains the following fields:    
 %   ex      - exitflag:
@@ -103,6 +105,13 @@ function [x,f,outinfo] = LTRSC_LEC_V2(fun,const,x0,params)
 %   tract   - number of iterations when TR is active
 %   trrej   - number of iterations when initial trial step is rejected
 %   params  - input paramaters
+%   numASOLV - number of projections onto null(A)
+%   numitATot - average number of iterations for each projection 
+%               (when iterative solvers are used)
+%   resitAv - average normalized residual
+%   numAfail - number of failures in iterative solver
+%   numDenseA - number of dense columns in A removed to compute
+%               preconditioner
 % 
 % See also LMTR_out, svsrch
 %
@@ -124,7 +133,10 @@ function [x,f,outinfo] = LTRSC_LEC_V2(fun,const,x0,params)
 % 04/24/20, J.B., Initial implementation of version 2
 % 04/27/20, J.B., Implementation of PCG 'subproblem' solver A*A'*x = A*g
 % 10/15/20, J.B., Implementation of SPQR and LSQR projections
-% 12/22/20, J.B., Preparation for release
+% 05/27/21, J.B., Additional check for whether constraint error is
+%                   below threshold
+% 05/27/21, J.B., Update to include check for constraint feasibility
+% 06/02/21, J.B., Implementation of detection of dense columns
 
 % Read input parameters
 if nargin<3
@@ -248,10 +260,6 @@ if isfield(params,'whichAsolve') && ~isempty(params.whichAsolve)
             hasSPQR = 0;
         end
         
-        if issparse(A) == 0
-            hasSPQR = 0;
-        end
-        
         if whichAsolve == 3 && hasSPQR == 0
             whichAsolve = 1;
         end
@@ -270,6 +278,19 @@ if isfield(params,'whichConv') && ~isempty(params.whichConv)
     whichConv = params.whichConv;
 else
     whichConv = 1;
+end;
+% Threshold to determine a dense column when a preconditioner in LSQR is
+% used
+if isfield(params,'tolDense') && ~isempty(params.tolDense)
+    tolDense = params.tolDense;
+else
+    tolDense = 0.1; 
+end;
+% Threshold to check for dense columns
+if isfield(params,'whenChkDense') && ~isempty(params.whenChkDense)
+    whenChkDense = params.whenChkDense;
+else
+    whenChkDense = 1e3; 
 end;
 
 % Set trust region parameters using the following pseudo-code
@@ -359,6 +380,7 @@ numitATot= 0; % number of iterations in iterative solver
 resitAv = 0.0; % average residual errors with iterative solver
 numAfail = 0; % number of times iterative solver did not converge
 %numcg   = 0; % number of constraint gradient evaluations 
+numDenseA = 0; % number of dense columns (((A'>0)*ones(mm,1))/mm > tolDense)
 
 % Constraints
 
@@ -474,7 +496,23 @@ switch whichAsolve
     case 4
         % LSQR (with preconditioning)
         if hasSPQR == 1
-            [~,RA,maskA1,infoLS] = spqr(A',optsLS);
+            % Dense column detection
+            on = true(n,1);            
+            if mm > whenChkDense
+                omm = ones(mm,1);            
+                countD = (A'>0)*omm;
+                [vals,sIdx] = sort(countD,'descend');
+                idxSi1 = sIdx(vals/mm>tolDense); % Thresholding
+                on(idxSi1) = 0;                        
+                numDenseA = length(idxSi1);                
+                % If all is dense, then revert to full matrix
+                if sum(on) == 0
+                    on = true(n,1);
+                end                
+            end
+            
+            % Call to SPQR with reduced A
+            [~,RA,maskA1,infoLS] = spqr(A(:,on)',optsLS);
             rankA = infoLS.rank_A_estimate;
             maskA = maskA1(1:rankA);            
         end
@@ -531,6 +569,7 @@ if convtest == 1 % ng<max(1,norm(x0))*gtol,
     outinfo.numitATot   = numitATot/numASOLV;
     outinfo.resitAv     = resitAv/numASOLV;
     outinfo.numAfail    = numAfail;
+    outinfo.numDenseA   = numDenseA;
     return;
 end
 
@@ -601,6 +640,7 @@ else  % halving step length until improvement
             outinfo.numitATot   = numitATot/numASOLV;
             outinfo.resitAv     = resitAv/numASOLV;
             outinfo.numAfail    = numAfail;
+            outinfo.numDenseA   = numDenseA;
             return;
         end
         xt=xl+ns*d;
@@ -693,6 +733,7 @@ if (conv>gtol) || (nb > btol)  % norm of gradient is too large, ng>gtol*max(1,no
             outinfo.numitATot   = numitATot/numASOLV;
             outinfo.resitAv     = resitAv/numASOLV;
             outinfo.numAfail    = numAfail;
+            outinfo.numDenseA   = numDenseA;
             return;
             
         end;            
@@ -965,6 +1006,7 @@ while (mflag==1)
             outinfo.numitATot   = numitATot/numASOLV;
             outinfo.resitAv     = resitAv/numASOLV;
             outinfo.numAfail    = numAfail;
+            outinfo.numDenseA   = numDenseA;
             return
         end
                     
@@ -1097,6 +1139,7 @@ while (mflag==1)
                 outinfo.numitATot   = numitATot/numASOLV;
                 outinfo.resitAv     = resitAv/numASOLV;
                 outinfo.numAfail    = numAfail;
+                outinfo.numDenseA   = numDenseA;
                 return
             end 
             
@@ -1196,14 +1239,19 @@ while (mflag==1)
     end
     
     % Check if the algorithm exceeded maximum number of iterations
-    if it > maxit           
-        ex      = -2;
+    if it > maxit || nb > btol      
+        if it > maxit
+            ex = -2;
+        elseif nb > btol
+            ex = -3;
+        end
         tcpu    = toc(t0);
         outinfo = LMTR_out(numf,numg,tcpu,ex,it,tract,trrej,params,numrst,numskip,numgp0);
         outinfo.numASOLV = numASOLV;
         outinfo.numitATot   = numitATot/numASOLV;
         outinfo.resitAv     = resitAv/numASOLV;
         outinfo.numAfail    = numAfail;
+        outinfo.numDenseA   = numDenseA;
         return;
     end   
     
@@ -1222,3 +1270,4 @@ outinfo.numASOLV = numASOLV;
 outinfo.numitATot   = numitATot/numASOLV;
 outinfo.resitAv     = resitAv/numASOLV;
 outinfo.numAfail    = numAfail;
+outinfo.numDenseA   = numDenseA;

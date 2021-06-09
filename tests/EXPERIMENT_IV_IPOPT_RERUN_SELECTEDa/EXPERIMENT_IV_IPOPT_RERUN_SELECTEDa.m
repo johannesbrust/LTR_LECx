@@ -1,4 +1,5 @@
-%-------------------- Experiment_IV_EXT ---------------------------------%%
+%-------------------- EXPERIMENT_IV_IPOPT_RERUN_SELECTEDa ---------------%%
+%%(Check for IPOPT behavior on Experiment 2)
 % Originally from the article 'Large-Scale Quasi-Newton Trust-Region Methods
 % With Low Dimensional Linear Equality Constraints' J.J. Brust, R.F. Marcia,
 % C.G. Petra
@@ -6,7 +7,8 @@
 % CUTEst problems, and adding linear equality constraints to them. The
 % linear constraints are synthetically generated.
 %
-% Comparison between two proposed solvers and two external solvers
+% This test reruns IPOPT on a set of 11 problems with larger maximum
+% number of iterations (10000).
 %
 % Extended experiment for the manuscript:
 % 'Efficient Large-Scale Quasi-Newton Trust-Region Methods With 
@@ -25,7 +27,9 @@
 % 02/04/19, J.B., Inclusion of Ipopt
 % 10/14/20, J.B., Initial setup for test of extended methods
 % 10/22/20, J.B., Test of comparing 7 solvers
-% 05/27/21, J.B., Re-run of experiment without iteration function for IPOPT
+% 11/06/20, J.B., Check of IPOPT outcomes
+% 06/02/21, J.B., Rerun on selected problems 
+% 06/04/21, J.B., Checking larger number of iterations for IPOPT
 %--------------------------------------------------------------------------
 %NOTE(S): This Experiment requires CUTEst to be installed
 
@@ -43,8 +47,6 @@ else
     addpath(genpath('../../solvers/ipopt'));
 end
 
-
-
 wtest       = warning('off','all');
 currentpath = pwd;
 
@@ -54,7 +56,7 @@ probpath    = fullfile(currentpath,'..','/..','/auxiliary/');
 
 rng(090317);
 
-fprintf('---------------- EXPERIMENT IV_EXT ------------------------\n');
+fprintf('---------------- EXPERIMENT IV_EXT RERUN ------------------------\n');
 tEX = tic;
 
 %%----------------------- Parameters ----------------------------------%
@@ -104,9 +106,10 @@ options_ipopt.ipopt.jac_c_constant        = 'yes';
 options_ipopt.ipopt.hessian_approximation = 'limited-memory';
 options_ipopt.ipopt.mu_strategy           = 'adaptive';
 options_ipopt.ipopt.tol                   = 1e-5;
-options_ipopt.dual_inf_tol                = 1e-5;
-options_ipopt.ipopt.print_level           = 0;
-options_ipopt.limited_memory_max_history  = 5;                                 
+%options_ipopt.dual_inf_tol                = 1e-5;
+options_ipopt.ipopt.print_level           = 0; % 5
+%options_ipopt.limited_memory_max_history  = 5;    
+options_ipopt.ipopt.max_iter = 10000; % 3000, 10000
                                     
 CUTEst_init  % initialize CUTEr, see appropriate documentation 
 fid     = fopen(fullfile(probpath,'cutest_list.txt'),'r');  % read file that contains CUTEr test problems
@@ -130,15 +133,61 @@ nms             = zeros(numProblems,2);
 
 %mm              = 10; % Number of equality constraints
 
-p=1;
+p=0;
 
-pmax = 62; % All problems
+pmax = 62; % 1, 62; % All problems
 
+infos = zeros(pmax,1);
+%clist={'ARWHEAD'};
+        
+% clist={'ARWHEAD';...
+%         'JIMACK'};
+% clist={'ARWHEAD';...
+%         'BOX';...
+%         'BRYBND';...
+%         'COSINE';...
+%         'CURLY10';...
+%         'CURLY20';...
+%         'CURLY30';...
+%         'DIXMAANG';...
+%         'DIXMAANJ';...
+%         'DIXMAANK';...
+%         'DIXMAANL';...
+%         'GENHUMPS';...
+%         'LIARWHD';...
+%         'MOREBV';...
+%         'MSQRTALS';...
+%         'MSQRTBLS';...
+%         'NONDIA';...
+%         'NONDQUAR';...
+%         'SCHMVETT';...
+%         'SPMSRTLS';...
+%         'SROSENBR';...
+%         'TQUARTIC';...
+%         'WOODS';...
+%         'SPARSINE';...
+%         'TESTQUAD';...
+%         'JIMACK'};
+clist={'COSINE';...        
+        'CURLY20';...
+        'CURLY30';...        
+        'DIXMAANL';...
+        'GENHUMPS';...        
+        'MSQRTALS';...
+        'MSQRTBLS';...        
+        'SCHMVETT';...
+        'SPMSRTLS';...
+        'SROSENBR';...        
+        'JIMACK'};
+
+s= 7; % Ipopt originally the 7th solver
 tline = fgets(fid);
 while ischar(tline)     
     tline = fgets(fid);       
     
     if (~strcmp(tline(1),'%'))  && (ischar(tline)) && p <= pmax   
+        
+        p=p+1;
         
         if isunix == 1 && ismac == 0
             eval(['!runcutest -p matlab -D ' tline]);
@@ -148,7 +197,12 @@ while ischar(tline)
             cmdcutest   = ['cutest2matlab_osx $MASTSIF/' tline]; 
             unix(cmdcutest);
         end
-
+        
+        if sum(strcmp(tline,clist))==0
+            continue; % Skip problem if not in clist
+        end
+        display(['Problem:',tline]);
+                
         prob            = cutest_setup();
         x0              = prob.x;
         params.trradb   = max(norm(x0),1);
@@ -190,38 +244,38 @@ while ischar(tline)
         options_const_l2.epsroot    = 1e-5;
                        
         % TR1
-         s=1;
-         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRSC_LEC_V1,obj,cons,x0,options_const,numRuns); % LTRSC_LEC_V1
-            
-         % TR1x1    
-        s=s+1;  
-        options_const.whichAsolve = 3;
-        [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRSC_LEC_V2,obj,cons,x0,options_const,numRuns); % LTRL2_LEC_V1
-            
-         % TR1x2    
-        s=s+1;
-        options_const.whichAsolve = 4;
-        [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRSC_LEC_V2,obj,cons,x0,options_const,numRuns); % LTRL2_LEC_V1   
-            
-        % TR2    
-        s=s+1;        
-        options_const_l2.whichAsolve = 1;
-        [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRL2_LEC_V1,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1
-        
-        % TR2x1
-        s=s+1;        
-        options_const_l2.whichAsolve = 3;
-        [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRL2_LEC_V2,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1
-        % TR2x2    
-        s=s+1;        
-        options_const_l2.whichAsolve = 4;
-        [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
-                runAlgorithm(@LTRL2_LEC_V2,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1    
+%          s=s+1;
+%          [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRSC_LEC_V1,obj,cons,x0,options_const,numRuns); % LTRSC_LEC_V1
+%             
+%          % TR1x1    
+%         s=s+1;  
+%         options_const.whichAsolve = 3;
+%         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRSC_LEC_V2,obj,cons,x0,options_const,numRuns); % LTRL2_LEC_V1
+%             
+%          % TR1x2    
+%         s=s+1;
+%         options_const.whichAsolve = 4;
+%         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRSC_LEC_V2,obj,cons,x0,options_const,numRuns); % LTRL2_LEC_V1   
+%             
+%         % TR2    
+%         s=s+1;        
+%         options_const_l2.whichAsolve = 1;
+%         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRL2_LEC_V1,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1
+%         
+%         % TR2x1
+%         s=s+1;        
+%         options_const_l2.whichAsolve = 3;
+%         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRL2_LEC_V2,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1
+%         % TR2x2    
+%         s=s+1;        
+%         options_const_l2.whichAsolve = 4;
+%         [ex(p,s),numf(p,s),numg(p,s),numit(p,s),tcpu(s,:,p),tract(p,s)]=...
+%                 runAlgorithm(@LTRL2_LEC_V2,obj,cons,x0,options_const_l2,numRuns); % LTRL2_LEC_V1    
         
         % fmincon
 %        s = s+1;
@@ -242,7 +296,7 @@ while ischar(tline)
 %         end
 
         % Ipopt
-        s = s+1;
+        %s = s+1;
         % exit : 0,1,2 acceptable
         for ir = 1:numRuns
           tStarti = tic;
@@ -259,7 +313,9 @@ while ischar(tline)
           numf(p,s)        = -1;
           numg(p,s)        = -1;
           numit(p,s)       = info.iter;
-       end
+        end
+       
+        infos(p,1) = info.status;
         
         % Average CPU time
         if p==1 && numRuns > 2
@@ -278,7 +334,7 @@ while ischar(tline)
         
         cutest_terminate();
         
-        p=p+1;            
+                    
     end
     
 end
@@ -318,37 +374,38 @@ types.markers   = ['o' 'o' 'o' 'o' 'o' 'o' 'o']; %'s' 's'
 indAlg          = [1 2 3 4 5 6 7]; % 5 6
 
 
-perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_EXT.eps'));
+% perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_EXT_IPOPTCHK.eps'));
+% 
+% perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_EXT_IPOPTCHK.eps'));
+% 
+% % Comparison between proposed solvers only (TR1)
+% indAlg          = [1 2 3];
+% 
+% perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_SEL_TR1_EXT_IPOPTCHK.eps'));
+% 
+% perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_SEL_TR1_EXT_IPOPTCHK.eps'));
+% 
+% % Comparison between proposed solvers only (TR2)
+% indAlg          = [4 5 6];
+% 
+% perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_SEL_TR2_EXT_IPOPTCHK.eps'));
+% 
+% perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
+% box on; grid on;
+% print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_SEL_TR2_EXT_IPOPTCHK.eps'));
 
-perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_EXT.eps'));
-
-% Comparison between proposed solvers only (TR1)
-indAlg          = [1 2 3];
-
-perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_SEL_TR1_EXT.eps'));
-
-perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_SEL_TR1_EXT.eps'));
-
-% Comparison between proposed solvers only (TR2)
-indAlg          = [4 5 6];
-
-perf(ex(:,indAlg),t_aver(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'time_EX_IV_SEL_TR2_EXT.eps'));
-
-perf(ex(:,indAlg),numit(:,indAlg),leg(indAlg),1,types);
-box on; grid on;
-print(gcf, '-dpsc2', fullfile(figpath,'iter_EX_IV_SEL_TR2_EXT.eps'));
-
-save(fullfile(datapath,'EXPERIMENT_IV_EXT'),'ex','numit','t_aver','numf','numg','params','tract', 'nms');
+save(fullfile(datapath,'EXPERIMENT_IV_EXT_IPOPT_RERUN_SELECTEDa'),...
+    'ex','numit','t_aver','numf','numg','params','tract', 'nms','infos');
 
 close ALL;
 

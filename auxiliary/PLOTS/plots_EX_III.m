@@ -1,9 +1,11 @@
-%-------------------- plots_EX -------------------------------------------%
+%-------------------- plots_EX_III ---------------------------------------%
 %
 % Script to generate performance profiles for the experiment outcomes
 %
 %-------------------------------------------------------------------------%
 % 12/11/20, J.B., Initial setup
+% 06/07/21, J.B., Update for x-ticks
+% 06/09/21, J.B., Preparation for release
 
 % Load perf_ext_fnc
 %addpath(fullfile(pwd,'..','..','/auxiliary'));
@@ -106,6 +108,13 @@ fig.PaperPositionMode   = 'auto';
 fig_pos                 = fig.PaperPosition;
 fig.PaperSize           = [fig_pos(3) fig_pos(4)];
 
+% Axis annotation
+ax = gca;
+ax.XTick = [2^(-1), 1, 2, 2^2, 2^3, 2^(4), 2^5];
+%XTickLabel = {'$2^{-8}$', '$2^{-4}$', '$1$', '$2^{4}$', '$2^{24}$'};
+XTickLabel = {'2^{-1}', '1', '2', '2^{2}', '2^{3}', '2^{4}' , '2^{5}'};
+set(ax,'XTickLabel',XTickLabel);
+
 figname ='EXPERIMENT_III_ITER';
 figname = [figname,'.pdf'];
 
@@ -120,6 +129,13 @@ fig                     = gcf;
 fig.PaperPositionMode   = 'auto';
 fig_pos                 = fig.PaperPosition;
 fig.PaperSize           = [fig_pos(3) fig_pos(4)];
+
+% Axis annotation
+ax = gca;
+ax.XTick = [2^(-1), 1, 2, 2^2, 2^3, 2^(4), 2^5];
+%XTickLabel = {'$2^{-8}$', '$2^{-4}$', '$1$', '$2^{4}$', '$2^{24}$'};
+XTickLabel = {'2^{-1}', '1', '2', '2^{2}', '2^{3}', '2^{4}' , '2^{5}'};
+set(ax,'XTickLabel',XTickLabel);
 
 figname ='EXPERIMENT_III_TIME';
 figname = [figname,'.pdf'];

@@ -1,0 +1,61 @@
+$\texttt{ARWHEAD}$ & 1250/5000 &343 &1.7e+02&349 &19&372 &19&264 &72&304 &\textbf{16}&315 &\emph{16}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{BDQRTIC}$ & 1250/5000 &181 &50&174 &\textbf{8.1}&187 &9.9&174 &31&186 &8.9&160 &\emph{8.4}&78 &1.2e+02\\ 
+$\texttt{BOX}$ & 2500/10000 &240 &1.5e+03&280 &63&281 &79&218 &2.1e+02&258 &\textbf{54}&208 &\emph{58}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{BROYDN7D}$ & 1250/5000 &355 &20&370 &\emph{18}&367 &18&355 &20&370 &\textbf{17}&381 &19&432 &6.5e+02\\ 
+$\texttt{BRYBND}$ & 1250/5000 &897 &1.5e+02&883 &\textbf{45}&1273 &64&1396 &1.2e+02&1177 &\emph{60}&1421 &70&1027 &1.7e+03\\ 
+$\texttt{COSINE}$ & 2500/10000 &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &5028 &1e+03&4527 &1.2e+03&4755 &2e+03&7318 &1.6e+03&3292 &\emph{910}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{CRAGGLVY}$ & 1250/5000 &373 &63&371 &\textbf{18}&369 &\emph{19}&400 &45&390 &20&397 &21&205 &3.4e+02\\ 
+$\texttt{CURLY10}$ & 2500/10000 &1563 &7.2e+02&2498 &5.3e+02&1496 &\emph{429}&1512 &4.5e+02&1549 &\textbf{347}&1759 &4.9e+02&1775 &3e+04\\ 
+$\texttt{CURLY20}$ & 2500/10000 &1951 &9.5e+02&2015 &\textbf{455}&1993 &\emph{552}&3149 &9.5e+02&4110 &8.7e+02&3836 &1.1e+03&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{CURLY30}$ & 2500/10000 &4457 &2.8e+03&4210 &\emph{952}&3669 &1e+03&2744 &\textbf{783}&6940 &1.6e+03&6145 &1.7e+03&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{DIXMAANA}$ & 750/3000 &10 &0.53&10 &\textbf{0.43}&10 &0.51&10 &0.5&10 &0.47&10 &\emph{0.46}&13 &8.3\\ 
+$\texttt{DIXMAANB}$ & 750/3000 &9 &0.55&9 &0.5&9 &\emph{0.5}&9 &0.59&9 &\textbf{0.5}&9 &0.55&11 &8.1\\ 
+$\texttt{DIXMAANC}$ & 750/3000 &12 &0.73&12 &0.67&12 &0.72&12 &\emph{0.65}&12 &\textbf{0.63}&12 &0.69&14 &10\\ 
+$\texttt{DIXMAAND}$ & 750/3000 &23 &1.7&23 &1.1&23 &1.2&22 &\emph{0.93}&22 &\textbf{0.83}&22 &1&27 &16\\ 
+$\texttt{DIXMAANE}$ & 750/3000 &35 &1.1&35 &1&35 &1.1&35 &\textbf{0.83}&35 &\emph{0.88}&35 &1.1&41 &18\\ 
+$\texttt{DIXMAANF}$ & 750/3000 &183 &5.2&194 &\textbf{3.9}&194 &5.7&194 &6.6&195 &\emph{4.9}&203 &6.7&297 &1.3e+02\\ 
+$\texttt{DIXMAANG}$ & 750/3000 &434 &19&397 &\textbf{8.3}&439 &12&435 &13&408 &\emph{9.8}&404 &11&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{DIXMAANH}$ & 750/3000 &433 &14&470 &11&454 &13&459 &\emph{11}&421 &\textbf{9.3}&443 &12&422 &1.8e+02\\ 
+$\texttt{DIXMAANI}$ & 750/3000 &82 &2&82 &\emph{1.8}&82 &2.4&82 &\textbf{1.6}&82 &1.8&82 &2.5&103 &46\\ 
+$\texttt{DIXMAANJ}$ & 750/3000 &1054 &41&1506 &35&1023 &\emph{27}&1415 &42&1490 &34&944 &\textbf{24}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{DIXMAANK}$ & 750/3000 &2971 &1e+02&3026 &65&3082 &71&2831 &80&2870 &\textbf{61}&2691 &\emph{62}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{DIXMAANL}$ & 750/3000 &1461 &\textbf{38}&3198 &69&2609 &60&2690 &66&2728 &\emph{58}&2597 &59&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{DIXON3DQ}$ & 2500/10000 &51 &17&51 &\emph{12}&51 &17&51 &17&51 &\textbf{12}&51 &16&56 &6.7e+02\\ 
+$\texttt{DQDRTIC}$ & 1250/5000 &13 &1.7&7 &0.85&7 &0.77&13 &1.5&7 &\textbf{0.75}&7 &\emph{0.75}&7 &13\\ 
+$\texttt{DQRTIC}$ & 1250/5000 &63 &\emph{4.6}&107 &6.7&107 &7&63 &\textbf{4.5}&107 &5.7&107 &6.1&93 &1.5e+02\\ 
+$\texttt{EDENSCH}$ & 500/2000 &32 &\emph{0.33}&32 &0.4&32 &0.38&32 &\textbf{0.32}&32 &0.39&32 &0.36&34 &5\\ 
+$\texttt{EG2}$ & 250/1000 &423 &2.2&504 &\emph{1.3}&439 &\textbf{1.3}&514 &5.2&624 &2&502 &1.9&908 &23\\ 
+$\texttt{ENGVAL1}$ & 1250/5000 &31 &2.7&31 &\textbf{1.8}&31 &2&31 &2.6&31 &\emph{1.9}&31 &2&38 &61\\ 
+$\texttt{EXTROSNB}$ & 250/1000 &148 &\emph{0.44}&148 &0.45&148 &0.49&145 &0.53&145 &0.46&145 &\textbf{0.39}&129 &3\\ 
+$\texttt{FLETCHCR}$ & 250/1000 &150 &\emph{0.4}&150 &0.46&150 &0.51&150 &\textbf{0.37}&150 &0.42&150 &0.41&137 &3.1\\ 
+$\texttt{FMINSRF2}$ & 1407/5625 &122 &10&122 &\emph{9.3}&122 &10&122 &10&122 &\textbf{7.8}&122 &9.6&167 &4e+02\\ 
+$\texttt{FREUROTH}$ & 1250/5000 &287 &1e+02&247 &\textbf{12}&235 &\emph{13}&274 &37&255 &13&234 &13&202 &3.2e+02\\ 
+$\texttt{GENHUMPS}$ & 1250/5000 &2215 &1.2e+02&1762 &99&1829 &\textbf{93}&2215 &1.3e+02&1762 &98&1829 &\emph{95}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{LIARWHD}$ & 1250/5000 &3854 &1.6e+03&3998 &4.4e+02&2726 &\emph{196}&2638 &1.2e+03&2408 &2.6e+02&1591 &\textbf{128}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{MOREBV}$ & 1250/5000 &151 &23&151 &22&151 &20&151 &19&151 &\emph{16}&151 &\textbf{16}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{MSQRTALS}$ & 256/1024 &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &78461 &6.6e+02&99724 &\emph{620}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{MSQRTBLS}$ & 256/1024 &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{NCB20}$ & 1253/5010 &345 &47&348 &18&349 &18&314 &33&317 &\textbf{16}&307 &\emph{16}&252 &3.9e+02\\ 
+$\texttt{NONCVXU2}$ & 1250/5000 &185 &20&185 &\textbf{9}&185 &9.5&186 &14&187 &\emph{9.2}&186 &9.4&120 &1.9e+02\\ 
+$\texttt{NONCVXUN}$ & 1250/5000 &282 &33&283 &\textbf{14}&282 &\emph{14}&360 &31&354 &17&370 &19&199 &3.1e+02\\ 
+$\texttt{NONDIA}$ & 1250/5000 &1612 &6.9e+02&1600 &88&1734 &\emph{88}&2764 &7.3e+02&1407 &\textbf{78}&1907 &98&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{NONDQUAR}$ & 1250/5000 &897 &4.3e+02&865 &47&811 &\textbf{42}&816 &2.1e+02&876 &47&857 &\emph{44}&332 &8.1e+02\\ 
+$\texttt{PENALTY1}$ & 250/1000 &8 &0.051&2 &0.018&2 &\emph{0.017}&8 &0.056&2 &0.019&2 &\textbf{0.016}&1 &0.043\\ 
+$\texttt{POWELLSG}$ & 1250/5000 &88 &6.1&88 &\textbf{4.4}&88 &4.6&88 &5.6&88 &\emph{4.4}&88 &4.6&99 &1.5e+02\\ 
+$\texttt{POWER}$ & 2500/10000 &51 &\textbf{17}&$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &51 &\emph{17}&$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &62 &6.9e+02\\ 
+$\texttt{QUARTC}$ & 1250/5000 &70 &\emph{4.9}&104 &5.3&104 &5.4&70 &\textbf{4.5}&104 &5.1&104 &5.6&89 &1.4e+02\\ 
+$\texttt{SCHMVETT}$ & 1250/5000 &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &70882 &3.9e+03&$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{MX}^{\dagger}$ & $\texttt{MX}$ &96572 &5.1e+03&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{SINQUAD}$ & 1250/5000 &236 &56&282 &15&214 &\textbf{11}&247 &32&216 &\emph{12}&277 &14&116 &1.8e+02\\ 
+$\texttt{SPARSQUR}$ & 2500/10000 &35 &13&43 &\emph{10}&43 &14&35 &13&43 &\textbf{9.9}&43 &14&31 &3.5e+02\\ 
+$\texttt{SPMSRTLS}$ & 1250/4999 &2222 &2.7e+02&1791 &\textbf{95}&2377 &1.2e+02&2792 &2e+02&2475 &1.3e+02&1834 &\emph{98}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{SROSENBR}$ & 1250/5000 &5561 &4.1e+02&8211 &4.3e+02&4814 &\textbf{235}&6400 &4.3e+02&6747 &3.6e+02&5280 &\emph{270}&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{TOINTGSS}$ & 1250/5000 &39 &3.1&39 &\textbf{2.2}&39 &2.3&39 &3&39 &2.3&39 &\emph{2.3}&49 &76\\ 
+$\texttt{TQUARTIC}$ & 1250/5000 &2069 &8.7e+02&1155 &\textbf{64}&1508 &\emph{78}&1494 &3.7e+02&1867 &1e+02&1871 &98&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{TRIDIA}$ & 1250/5000 &147 &9&82 &\textbf{4.2}&82 &4.3&147 &9.1&82 &\emph{4.2}&82 &4.4&66 &1e+02\\ 
+$\texttt{WOODS}$ & 1000/4000 &1192 &45&1157 &38&1077 &\textbf{27}&1236 &44&1167 &37&1132 &\emph{29}&971 &1.3e+03\\ 
+$\texttt{SPARSINE}$ & 1250/5000 &1504 &1.7e+02&1476 &79&1464 &\textbf{74}&2188 &1.6e+02&1407 &\emph{74}&3999 &2e+02&2294 &5.6e+03\\ 
+$\texttt{TESTQUAD}$ & 1250/5000 &10988 &\textbf{623}&14186 &7.3e+02&13357 &6.5e+02&10988 &\emph{643}&14186 &7.3e+02&13357 &6.6e+02&$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{JIMACK}$ & 888/3549 &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ &$\texttt{NC}^{\dagger}$ & $\texttt{NC}$ \\ 
+$\texttt{NCB20B}$ & 1250/5000 &57 &4.1&56 &3.2&56 &3.2&57 &4.2&56 &\textbf{3.1}&56 &\emph{3.2}&47 &73\\ 
+$\texttt{EIGENALS}$ & 638/2550 &202 &\emph{3.2}&204 &3.7&203 &4.1&202 &\textbf{3}&204 &3.6&203 &4&161 &43\\ 
+$\texttt{EIGENBLS}$ & 638/2550 &28 &0.59&28 &0.65&28 &0.6&28 &\textbf{0.51}&28 &\emph{0.52}&28 &0.62&28 &7.7\\ 
