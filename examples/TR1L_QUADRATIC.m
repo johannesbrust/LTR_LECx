@@ -26,7 +26,7 @@ mm  = 60; % 600
 
 Q1  = randn(n,n);
 Q   = Q1'*Q1;
-A   = randn(mm,n);
+A   = sparse(randn(mm,n));
 b0  = randn(n,1);
 b   = A*b0;
 c   = randn(n,1);
